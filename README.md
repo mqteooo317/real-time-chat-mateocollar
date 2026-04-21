@@ -35,6 +35,21 @@ http://localhost:3000
 
 ---
 
+## How it works
+
+This project runs HTTP and WebSockets on the same port:
+
+1. **User opens `localhost:3000`** → Express serves the `index.html` file. This is normal HTTP.
+2. **The HTML loads and connects via WebSocket** → `io.on('connection')` triggers on the server for that user.
+3. **User sends a message** → The frontend emits a `chat message` event through the WebSocket.
+4. **Server receives it** → `socket.on('chat message')` catches the event.
+5. **Server broadcasts to everyone** → `io.emit('chat message')` sends the message to all connected clients instantly.
+6. **Connection recovery** → If a user loses internet for < 3s, `connectionStateRecovery` resends any messages they missed when they reconnect.
+
+Key difference: HTTP is request/response. WebSockets keep a live connection so the server can push data to you without you asking first.
+
+---
+
 # Author
 
 Jonas Mateo Collar
