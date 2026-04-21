@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mateo chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>/*IGNORE STYLES*/ *{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:#e2e8f0;min-height:100vh;display:flex;justify-content:center;align-items:center;transition:background .2s ease}body.dark{background:#0f172a}.theme-btn{position:fixed;top:20px;right:20px;width:44px;height:44px;border-radius:50%;background:#f1f5f9;border:1px solid #cbd5e1;color:#1e293b;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.3rem;transition:all .2s ease;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);z-index:100;backdrop-filter:blur(8px)}body.dark .theme-btn{background:#1e293b;border-color:#334155;color:#f1f5f9}.theme-btn:hover{transform:scale(1.05);background:#cbd5e1}body.dark .theme-btn:hover{background:#334155}#chat{width:100%;max-width:900px;height:85vh;background:#ffffff;border-radius:24px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);display:flex;flex-direction:column;overflow:hidden;transition:background .2s ease;border:1px solid #e2e8f0}body.dark #chat{background:#1e293b;border-color:#334155}#messages{flex:1;list-style:none;padding:24px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;background:#f8fafc}body.dark #messages{background:#0f172a}#messages li{background:#e2e8f0;color:#1e293b;padding:12px 18px;border-radius:20px;max-width:70%;width:fit-content;word-break:break-word;font-size:.95rem;line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,0.05);animation:fadeIn .2s ease}body.dark #messages li{background:#334155;color:#f1f5f9}@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}#form{display:flex;gap:12px;padding:20px 24px;background:#ffffff;border-top:1px solid #e2e8f0}body.dark #form{background:#1e293b;border-top-color:#334155}#input{flex:1;padding:14px 20px;border:none;border-radius:32px;background:#f1f5f9;color:#1e293b;font-size:.95rem;outline:none;transition:all .2s ease;font-family:inherit}body.dark #input{background:#0f172a;color:#f1f5f9}#input:focus{background:#ffffff;box-shadow:0 0 0 2px #3b82f6}body.dark #input:focus{background:#1e293b;box-shadow:0 0 0 2px #3b82f6}#input::placeholder{color:#94a3b8}body.dark #input::placeholder{color:#64748b}button[type="submit"]{background:#3b82f6;color:#fff;border:none;padding:0 32px;border-radius:32px;font-weight:600;font-size:.9rem;cursor:pointer;transition:all .2s ease;font-family:inherit}button[type="submit"]:hover{background:#2563eb;transform:scale(1.02)}#messages::-webkit-scrollbar{width:8px}#messages::-webkit-scrollbar-track{background:#e2e8f0;border-radius:4px}body.dark #messages::-webkit-scrollbar-track{background:#1e293b}#messages::-webkit-scrollbar-thumb{background:#cbd5e1;border-radius:4px}body.dark #messages::-webkit-scrollbar-thumb{background:#475569}#messages::-webkit-scrollbar-thumb:hover{background:#94a3b8}body.dark #messages::-webkit-scrollbar-thumb:hover{background:#64748b}</style>
+</head>
+<body>
+    <button id="toggleTheme" class="theme-btn">
+        <i class="fas fa-moon"></i>
+    </button>
+    
+    <section id="chat">
+        <ul id="messages"></ul>
+        <form id="form">
+            <input type="text" name="message" id="input" placeholder="Escribe un mensaje..." autocomplete="off" />
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <script type="module">
+        import { io } from 'https://cdn.socket.io/4.3.2/socket.io.esm.min.js'
+        const socket = io()
+        
+        const form = document.getElementById('form')
+        const input = document.getElementById('input')
+        const messages = document.getElementById('messages')
+        
+        socket.on('chat message', (msg) => {
+            const i = `<li>${msg}</li>`
+            messages.insertAdjacentHTML('beforeend', i)
+            // IGNORE - only ux purposses
+            messages.scrollTop = messages.scrollHeight
+        })
+        
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+            
+            if (input.value.trim()) {
+                socket.emit('chat message', input.value)
+                input.value = ''
+            }
+        })
+
+        //IGNORE
+        const toggleTheme = document.getElementById('toggleTheme')
+        toggleTheme.addEventListener('click', () => {
+            document.body.classList.toggle('dark')
+            const icon = toggleTheme.querySelector('i')
+            if (document.body.classList.contains('dark')) {
+                icon.classList.remove('fa-moon')
+                icon.classList.add('fa-sun')
+            } else {
+                icon.classList.remove('fa-sun')
+                icon.classList.add('fa-moon')
+            }
+        })
+    </script>    
+</body>
+</html>
