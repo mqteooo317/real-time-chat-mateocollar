@@ -15,14 +15,14 @@ const io = new Server(server, {
 
 app.use(logger('dev'))
 
-io.on('connection', (socket) => {
+io.on('connection', function(socket) {
     console.info("an user has connected!")
     
-    socket.on('disconnect', () => {
+    socket.on('disconnect', function() {
         console.log('an user has disconnected')
     })
     
-    socket.on('chat message', (msg) => {
+    socket.on('chat message', function(msg) {
         io.emit('chat message', msg)
     })
 })

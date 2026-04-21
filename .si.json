@@ -17,6 +17,10 @@
     ".css": {
       "enabled": false,
       "run": "vscode-css-language-server --stdio"
+    },
+    ".md": {
+      "enabled": true,
+      "run": "marksman server"
     }
   }
 }
