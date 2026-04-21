@@ -1,4 +1,7 @@
-[[GitHub Profile](https://img.shields.io/badge/GitHub-mqteooo317-black?style=for-the-badge&logo=github)](https://github.com/mqteooo317) [[GitHub Repo](https://img.shields.io/badge/Repo-real--time--chat--mateocollar-blue?style=for-the-badge&logo=github)](https://github.com/mqteooo317/real-time-chat-mateocollar) [[License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge)](https://opensource.org/licenses/Apache-2.0) [[Discord](https://img.shields.io/badge/Discord-XalTeam-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/BsaeV5tZWc)
+[![GitHub Profile](https://img.shields.io/badge/GitHub-mqteooo317-black?style=for-the-badge&logo=github)](https://github.com/mqteooo317)
+[![GitHub Repo](https://img.shields.io/badge/Repo-real--time--chat--mateocollar-blue?style=for-the-badge&logo=github)](https://github.com/mqteooo317/real-time-chat-mateocollar)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=for-the-badge)](https://opensource.org/licenses/Apache-2.0)
+[![Discord](https://img.shields.io/badge/Discord-XalTeam-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/BsaeV5tZWc)
 
 A small sample project made by Jonas Mateo Collar showing how to use Socket.io and WebSockets. Built for novices and Jr devs from the XalTeam community and anyone who wants to learn real-time communication in Node.js.
 
