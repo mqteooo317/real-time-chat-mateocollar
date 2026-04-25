@@ -1,3 +1,4 @@
+//Hi GUYS, ill made this code for you for learning. Please check socket.io docs and import
 import express from 'express'
 import logger from 'morgan'
 import { Server } from 'socket.io'
